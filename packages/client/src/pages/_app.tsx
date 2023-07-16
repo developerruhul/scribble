@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/toaster';
 import { usePageLoadStore } from '@/lib/stores/misc-store';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </div>
+      <Toaster />
     </ThemeProvider>
   );
 }

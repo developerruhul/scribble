@@ -23,7 +23,16 @@ const Navbar = () => {
           {isLoggedIn ? (
             <AuthedNavItems />
           ) : (
-            <Button asChild size={'sm'}>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                login(
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+                );
+              }}
+              asChild
+              size={'sm'}
+            >
               <Link href={'/login'}>Log in</Link>
             </Button>
           )}
