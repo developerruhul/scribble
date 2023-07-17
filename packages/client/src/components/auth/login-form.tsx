@@ -8,8 +8,8 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { IloginFormSchema } from './validation-schema';
 import Link from 'next/link';
+import { type IloginFormSchema } from 'shared';
 
 interface IloginFormProps {
   form: UseFormReturn<IloginFormSchema>;
@@ -22,11 +22,11 @@ const LoginForm = ({ onSubmit, form }: IloginFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem className="mb-3">
-              <FormLabel>Username</FormLabel>
-              <Input size={30} placeholder="username123" {...field} />
+              <FormLabel>Email</FormLabel>
+              <Input size={30} placeholder="Enter your email" {...field} />
               <FormMessage />
             </FormItem>
           )}
@@ -35,7 +35,7 @@ const LoginForm = ({ onSubmit, form }: IloginFormProps) => {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem className='mb-3'>
+            <FormItem className="mb-3">
               <FormLabel>Password</FormLabel>
               <Input type="password" placeholder="********" {...field} />
               <FormMessage />

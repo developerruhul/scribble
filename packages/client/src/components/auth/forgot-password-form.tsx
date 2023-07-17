@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { IForgotPassSchema, forgotPassSchema } from './validation-schema';
+import { IForgotPassSchema, forgotPassSchema } from 'shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
@@ -21,7 +21,7 @@ const ForgotPasswordForm = () => {
         <FormField
           name="email"
           control={form.control}
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <Input size={30} placeholder="Enter your email" {...field} />

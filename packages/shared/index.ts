@@ -1,11 +1,9 @@
 import * as z from 'zod';
 
 function getEmailRegex(): z.ZodString {
-  return z
-    .string()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-      message: 'Please provide a valid email',
-    });
+  return z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    message: 'Please provide a valid email!',
+  });
 }
 
 /**
@@ -34,29 +32,23 @@ export const resetPassSchema = z
 export type IResetPassSchema = z.infer<typeof resetPassSchema>;
 
 /**
- * REGISTER FORM
+ * REGISTER SCHEMA
  */
 export const registerFormSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
+  name: z.string().min(2),
+  email: getEmailRegex(),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long.' }),
-  email: getEmailRegex(),
-  name: z.string().min(2),
 });
 
 export type IRegisterFormSchema = z.infer<typeof registerFormSchema>;
 
 /**
- * LOGIN FORM
+ * LOGIN SCHEMA
  */
-
 export const loginFormSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
+  email: getEmailRegex(),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long.' }),

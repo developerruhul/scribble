@@ -6,17 +6,13 @@ import Link from 'next/link';
 import { Icons } from '@/components/icons';
 import MainLayout from '@/components/layouts/main-layout';
 import RegisterForm from '@/components/auth/register-form';
-import {
-  type IRegisterFormSchema,
-  registerFormSchema,
-} from '@/components/auth/validation-schema';
+import { type IRegisterFormSchema, registerFormSchema } from 'shared';
 import illustration from '@/assets/sitting-reading.svg';
 
 function Register() {
   const form = useForm<IRegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      username: '',
       password: '',
       name: '',
       email: '',
@@ -32,9 +28,9 @@ function Register() {
 
   return (
     <MainLayout className="flex h-full w-full items-center justify-center">
-      <div className="md:w-1/2 flex items-center justify-center flex-col h-full">
+      <div className="md:w-1/2 -mt-8 flex items-center justify-center flex-col h-full">
         <section className="flex flex-col items-center mb-6 space-y-1">
-          <Icons.logo className="text-[40px]" />
+          <Icons.logo className="text-[45px]" />
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an account
           </h1>

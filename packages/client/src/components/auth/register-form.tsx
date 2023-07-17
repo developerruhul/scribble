@@ -8,14 +8,14 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { type IRegisterFormSchema } from './validation-schema';
+import { type IRegisterFormSchema } from 'shared';
 
-interface IloginFormProps {
+interface IRegisterFormProps {
   form: UseFormReturn<IRegisterFormSchema>;
   onSubmit: (values: IRegisterFormSchema) => void;
 }
 
-const RegisterForm = ({ onSubmit, form }: IloginFormProps) => {
+const RegisterForm = ({ onSubmit, form }: IRegisterFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -26,17 +26,6 @@ const RegisterForm = ({ onSubmit, form }: IloginFormProps) => {
             <FormItem className="mb-3">
               <FormLabel>Full name</FormLabel>
               <Input size={30} placeholder="John Doe" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem className="mb-3">
-              <FormLabel>Username</FormLabel>
-              <Input size={30} placeholder="username123" {...field} />
               <FormMessage />
             </FormItem>
           )}

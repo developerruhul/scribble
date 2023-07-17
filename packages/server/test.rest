@@ -1,0 +1,18 @@
+POST   http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ruhul Amin",
+  "email": "ruhulamin.webdev@gmail.com",
+  "password": "12345678"
+}
+
+###
+
+POST   http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "ruhulamin.webdev@gmail.com",
+  "password": "12345678"
+}

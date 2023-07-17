@@ -6,17 +6,14 @@ import { useForm } from 'react-hook-form';
 import MainLayout from '@/components/layouts/main-layout';
 import { Icons } from '@/components/icons';
 import LoginForm from '@/components/auth/login-form';
-import {
-  type IloginFormSchema,
-  loginFormSchema,
-} from '@/components/auth/validation-schema';
+import { type IloginFormSchema, loginFormSchema } from 'shared';
 import illustration from '@/assets/sitting-reading.svg';
 
 function Login() {
   const form = useForm<IloginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -30,9 +27,9 @@ function Login() {
 
   return (
     <MainLayout className="flex h-full w-full items-center justify-center">
-      <div className="md:w-1/2 flex items-center justify-center flex-col h-full">
+      <div className="md:w-1/2 -mt-8 flex items-center justify-center flex-col h-full">
         <section className="flex flex-col items-center mb-6 space-y-1">
-          <Icons.logo className="text-[40px]" />
+          <Icons.logo className="text-[45px]" />
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>

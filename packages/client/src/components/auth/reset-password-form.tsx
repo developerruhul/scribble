@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { IResetPassSchema, resetPassSchema } from './validation-schema';
+import { IResetPassSchema, resetPassSchema } from 'shared';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 
@@ -24,7 +24,7 @@ const ResetPasswordForm = () => {
         <FormField
           name="password"
           control={form.control}
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem className="mb-3.5">
               <FormLabel>Password</FormLabel>
               <Input
@@ -40,7 +40,7 @@ const ResetPasswordForm = () => {
         <FormField
           name="confirm_password"
           control={form.control}
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <Input
