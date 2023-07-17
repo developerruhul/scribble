@@ -22,9 +22,16 @@ const Navbar = () => {
           {isLoggedIn ? (
             <AuthedNavItems />
           ) : (
-            <Button asChild size={'sm'}>
-              <Link href={'/login'}>Log in</Link>
-            </Button>
+            <>
+              <div className='flex items-center space-x-2'>
+                <Button asChild variant={"secondary"} size={'sm'}>
+                  <Link href={'/register'}>Sign up</Link>
+                </Button>
+                <Button asChild size={'sm'}>
+                  <Link href={'/login'}>Log in</Link>
+                </Button>
+              </div>
+            </>
           )}
         </section>
       </nav>
