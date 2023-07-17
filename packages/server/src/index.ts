@@ -1,5 +1,6 @@
 require('dotenv').config();
 import Express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import authRoute from './routes/auth';
 
@@ -8,8 +9,10 @@ import authRoute from './routes/auth';
  */
 const app = Express();
 
+app.use(cors({ origin: process.env.FRONTEND_URL, optionsSuccessStatus: 200 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 /**
  * ROUTES
  */

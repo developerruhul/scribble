@@ -12,6 +12,12 @@ import omit from 'lodash/omit';
 
 const authRoute = Router();
 
+const REFRESH_TOKEN_CONFIG = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: true,
+};
+
 authRoute.post('/register', async (req, res) => {
   try {
     registerFormSchema.parse(req.body);
@@ -35,9 +41,13 @@ authRoute.post('/register', async (req, res) => {
 
   const user = await prismaClient.user.create({ data: userData });
   const safeUserObj = omit(user, ['password']);
-  const jwt = signJWT(safeUserObj);
+  const token = signJWT(safeUserObj, '15s');
+  const refresh_token = signJWT(safeUserObj, '5m');
 
-  res.status(201).json({ status: 'success', token: jwt, user: safeUserObj });
+  res
+    .cookie('refresh_token', refresh_token, REFRESH_TOKEN_CONFIG)
+    .status(201)
+    .json({ status: 'success', token: token, user: safeUserObj });
 });
 
 authRoute.post('/login', async (req, res) => {
@@ -58,8 +68,13 @@ authRoute.post('/login', async (req, res) => {
     if (!passMatched) throw PASSWORD_DONT_MATCH;
 
     const safeUserObj = omit(user, ['password']);
-    const jwt = signJWT(safeUserObj);
-    res.status(200).json({ status: 'success', token: jwt, user: safeUserObj });
+    const jwt = signJWT(safeUserObj, '15s');
+    const refresh_token = signJWT(safeUserObj, '5m');
+
+    res
+      .cookie('refresh_token', refresh_token, REFRESH_TOKEN_CONFIG)
+      .status(200)
+      .json({ status: 'success', token: jwt, user: safeUserObj });
   } catch (error) {
     return res.status(400).json(error);
   }

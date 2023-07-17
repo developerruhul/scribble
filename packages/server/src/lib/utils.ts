@@ -16,6 +16,6 @@ export const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next);
 };
 
-export const signJWT = (userData: Partial<User>) => {
-  return jwt.sign(userData, JWT_SECRET);
+export const signJWT = (userData: Partial<User>, expiryDate?: string) => {
+  return jwt.sign(userData, JWT_SECRET, { expiresIn: expiryDate || '24h' });
 };
