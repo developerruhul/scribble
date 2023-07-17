@@ -18,18 +18,18 @@ interface IloginFormProps {
 const RegisterForm = ({ onSubmit, form }: IloginFormProps) => {
   return (
     <Form {...form}>
-      <FormField
-        control={form.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem className="mb-3">
-            <FormLabel>Full name</FormLabel>
-            <Input size={30} placeholder="John Doe" {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="mb-3">
+              <FormLabel>Full name</FormLabel>
+              <Input size={30} placeholder="John Doe" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="username"

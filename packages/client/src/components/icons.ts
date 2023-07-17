@@ -1,4 +1,9 @@
-import { PiNotePencilThin, PiScribbleLoopFill } from 'react-icons/pi';
+import {
+  PiFingerprintLight,
+  PiNotePencilThin,
+  PiScribbleLoopFill,
+} from 'react-icons/pi';
+import { CgPassword } from 'react-icons/cg';
 import { CreditCard, LogOut, Settings, User } from 'lucide-react';
 
 export const Icons = {
@@ -8,4 +13,6 @@ export const Icons = {
   LogOut,
   Settings,
   User,
+  fingerprint: PiFingerprintLight,
+  password: CgPassword,
 };

@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { IloginFormSchema } from './validation-schema';
+import Link from 'next/link';
 
 interface IloginFormProps {
   form: UseFormReturn<IloginFormSchema>;
@@ -34,13 +35,22 @@ const LoginForm = ({ onSubmit, form }: IloginFormProps) => {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className='mb-3'>
               <FormLabel>Password</FormLabel>
               <Input type="password" placeholder="********" {...field} />
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <p className="text-sm text-muted-foreground">
+          <Link
+            href="/forgot-password"
+            className="hover:opacity-90 transition-opacity"
+          >
+            Forgot password?
+          </Link>
+        </p>
 
         <Button type="submit" className="mt-6">
           Log in

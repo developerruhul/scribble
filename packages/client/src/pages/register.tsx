@@ -10,6 +10,7 @@ import {
   type IRegisterFormSchema,
   registerFormSchema,
 } from '@/components/auth/validation-schema';
+import illustration from '@/assets/sitting-reading.svg';
 
 function Register() {
   const form = useForm<IRegisterFormSchema>({
@@ -31,7 +32,7 @@ function Register() {
 
   return (
     <MainLayout className="flex h-full w-full items-center justify-center">
-      <div className="md:w-1/2 flex items-center justify-center flex-col md:drk:bg-slate-500/40 h-full">
+      <div className="md:w-1/2 flex items-center justify-center flex-col h-full">
         <section className="flex flex-col items-center mb-6 space-y-1">
           <Icons.logo className="text-[40px]" />
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -53,7 +54,8 @@ function Register() {
 
       <section className="hidden md:flex items-center justify-center w-1/2 bg-slate-500/10 dark:bg-teal-600/60 h-full">
         <Image
-          src={require('@/assets/sitting-reading.svg')}
+          priority={false}
+          src={illustration}
           alt="Man sitting in a chair reading. Indicating scribble brand"
         />
       </section>

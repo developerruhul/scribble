@@ -4,8 +4,8 @@ import { type ClassValue } from 'clsx';
 import { cn } from '@/lib/utils';
 
 interface layoutProps {
-  children: React.ReactNode;
-  className: ClassValue;
+  children?: React.ReactNode;
+  className?: ClassValue;
 }
 
 const MainLayout = ({ children, className }: layoutProps) => {
