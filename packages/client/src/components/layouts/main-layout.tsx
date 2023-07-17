@@ -1,11 +1,18 @@
 import React from 'react';
 import Navbar from '../navbar';
+import { type ClassValue } from 'clsx';
+import { cn } from '@/lib/utils';
 
-const MainLayout = ({ children }: React.PropsWithChildren) => {
+interface layoutProps {
+  children: React.ReactNode;
+  className: ClassValue;
+}
+
+const MainLayout = ({ children, className }: layoutProps) => {
   return (
     <>
       <Navbar />
-      <main className="mt-14">{children}</main>
+      <main className={cn('pt-14', className)}>{children}</main>
     </>
   );
 };
