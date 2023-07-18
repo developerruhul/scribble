@@ -16,3 +16,11 @@ Content-Type: application/json
   "email": "ruhulamin.webdev@gmail.com",
   "password": "12345678"
 }
+
+###
+POST http://localhost:3001/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "ruhulamin.webdev@gmail.com"
+}
