@@ -39,15 +39,8 @@ authRoute.post('/register', async (req, res) => {
     password: bcrypt.hashSync(req.body.password, 10),
   };
 
-  const user = await prismaClient.user.create({ data: userData });
-  const safeUserObj = omit(user, ['password']);
-  const token = signJWT(safeUserObj, '15s');
-  const refresh_token = signJWT(safeUserObj, '5m');
-
-  res
-    .cookie('refresh_token', refresh_token, REFRESH_TOKEN_CONFIG)
-    .status(201)
-    .json({ status: 'success', token: token, user: safeUserObj });
+  await prismaClient.user.create({ data: userData });
+  res.status(201).json({ status: 'success' });
 });
 
 authRoute.post('/login', async (req, res) => {
