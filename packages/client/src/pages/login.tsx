@@ -8,8 +8,17 @@ import { Icons } from '@/components/icons';
 import LoginForm from '@/components/auth/login-form';
 import { type IloginFormSchema, loginFormSchema } from 'shared';
 import illustration from '@/assets/sitting-reading.svg';
+import { useMutation } from '@tanstack/react-query';
+import fetcher from '@/lib/axios';
+import { toast } from '@/components/ui/use-toast';
+import { getErrorMessage } from '@/lib/utils';
+import { useRouter } from 'next/router';
+import { useAuthStore } from '@/lib/stores/auth-store';
 
 function Login() {
+  const router = useRouter();
+  const authStore = useAuthStore();
+
   const form = useForm<IloginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -18,11 +27,32 @@ function Login() {
     },
   });
 
-  // 2. Define a submit handler.
+  const { mutate, isLoading } = useMutation({
+    mutationFn: async (variables: IloginFormSchema) => {
+      return fetcher.post('/auth/login', variables);
+    },
+    onError(error) {
+      toast({
+        title: getErrorMessage(error?.response?.data || error),
+        description: 'Please try again!',
+        variant: 'destructive',
+      });
+    },
+    onSuccess(res) {
+      if (res.data?.token && res.data?.user) {
+        authStore.login(res.data.token, res.data.user);
+      }
+
+      router.push('/');
+
+      toast({
+        title: 'Welcome to scribble!',
+      });
+    },
+  });
+
   function onSubmit(values: IloginFormSchema) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    mutate(values);
   }
 
   return (
@@ -35,7 +65,7 @@ function Login() {
           </h1>
         </section>
 
-        <LoginForm form={form} onSubmit={onSubmit} />
+        <LoginForm isLoading={isLoading} form={form} onSubmit={onSubmit} />
 
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link

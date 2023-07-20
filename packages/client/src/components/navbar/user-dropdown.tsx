@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Icons } from '@/components/icons';
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/stores/auth-store';
+import { useRouter } from 'next/router';
 
 function UserAvatar() {
   return (
@@ -23,6 +24,12 @@ function UserAvatar() {
 
 export default function UserDropdown() {
   const logout = useAuthStore((s) => s.logout);
+  const router = useRouter();
+
+  function handleLogout() {
+    router.push('/login');
+    logout();
+  }
 
   return (
     <DropdownMenu>
@@ -39,19 +46,19 @@ export default function UserDropdown() {
 
         <DropdownMenuSeparator />
         <div className="my-2">
-          <DropdownMenuItem className='py-2' asChild>
+          <DropdownMenuItem className="py-2" asChild>
             <Link className="cursor-pointer" href={'/profile'}>
               <Icons.User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className='py-2' asChild>
+          <DropdownMenuItem className="py-2" asChild>
             <Link className="cursor-pointer" href={'/settings/billing'}>
               <Icons.CreditCard className="mr-2 h-4 w-4" />
               <span>Billing</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className='py-2' asChild>
+          <DropdownMenuItem className="py-2" asChild>
             <Link className="cursor-pointer" href={'/settings'}>
               <Icons.Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
@@ -61,10 +68,10 @@ export default function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='py-2' asChild>
+        <DropdownMenuItem className="py-2" asChild>
           <button
             className="outline-none cursor-pointer w-full"
-            onClick={logout}
+            onClick={handleLogout}
           >
             <Icons.LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>

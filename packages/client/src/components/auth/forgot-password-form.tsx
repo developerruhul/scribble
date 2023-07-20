@@ -24,8 +24,8 @@ const ForgotPasswordForm = () => {
     },
     onError(error) {
       toast({
-        title: 'Sorry! Something went wrong',
-        description: getErrorMessage(error?.response?.data || error),
+        title: getErrorMessage(error?.response?.data || error),
+        description: 'Please try again',
         variant: 'destructive',
       });
     },
@@ -60,7 +60,7 @@ const ForgotPasswordForm = () => {
           {isLoading && (
             <Icons.spinner className="animate-spin text-2xl mr-3" />
           )}
-          <span>Log in</span>
+          <span>Submit</span>
         </Button>
       </form>
     </Form>

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import jwt_decode from 'jwt-decode';
 import jsCookie from 'js-cookie';
+import fetcher from '../axios';
 
 interface User {
   name?: string;
@@ -10,29 +10,32 @@ interface User {
 }
 
 interface AuthInfoStore {
-  jwt?: string | null;
+  token?: string | null;
   user?: null | User;
-  login: (jwt: string) => void;
+  login: (token: string, user: User) => void;
   logout: () => void;
   updateUser: (user: User) => void;
 }
 
 const initialState = {
   user: null,
-  jwt: null,
+  token: null,
 };
 
 export const useAuthStore = create<AuthInfoStore>()(
   persist(
     (set) => ({
-      jwt: null,
+      token: null,
       user: null,
-      login: (jwt: string) => {
-        jsCookie.set('jwt', jwt, { sameSite: 'strict' });
-        set(() => ({ jwt, user: jwt_decode(jwt) }));
+      login: (token: string, user: User) => {
+        jsCookie.set('token', token, { sameSite: 'strict' });
+        set(() => ({ token: token, user }));
       },
       logout: () => {
-        jsCookie.remove('jwt');
+        try {
+          fetcher.post('/auth/logout');
+        } catch (error) {}
+        jsCookie.remove('token');
         set(initialState);
       },
       updateUser: (user: User) => set({ user }),

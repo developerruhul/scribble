@@ -9,13 +9,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { type IRegisterFormSchema } from 'shared';
+import { Icons } from '../icons';
 
 interface IRegisterFormProps {
   form: UseFormReturn<IRegisterFormSchema>;
   onSubmit: (values: IRegisterFormSchema) => void;
+  isLoading?: boolean;
 }
 
-const RegisterForm = ({ onSubmit, form }: IRegisterFormProps) => {
+const RegisterForm = ({ onSubmit, form, isLoading }: IRegisterFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -53,8 +55,11 @@ const RegisterForm = ({ onSubmit, form }: IRegisterFormProps) => {
           )}
         />
 
-        <Button type="submit" className="mt-6">
-          Sign Up
+        <Button type="submit" className="mt-6" disabled={isLoading}>
+          {isLoading && (
+            <Icons.spinner className="animate-spin text-2xl mr-3" />
+          )}
+          <span>Sign up</span>
         </Button>
 
         <div className="relative w-full my-6">

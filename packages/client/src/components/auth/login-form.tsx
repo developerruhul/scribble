@@ -10,13 +10,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { type IloginFormSchema } from 'shared';
+import { Icons } from '../icons';
 
 interface IloginFormProps {
   form: UseFormReturn<IloginFormSchema>;
   onSubmit: (values: IloginFormSchema) => void;
+  isLoading?: boolean;
 }
 
-const LoginForm = ({ onSubmit, form }: IloginFormProps) => {
+const LoginForm = ({ onSubmit, form, isLoading }: IloginFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -52,8 +54,11 @@ const LoginForm = ({ onSubmit, form }: IloginFormProps) => {
           </Link>
         </p>
 
-        <Button type="submit" className="mt-6">
-          Log in
+        <Button type="submit" className="mt-6" disabled={isLoading}>
+          {isLoading && (
+            <Icons.spinner className="animate-spin text-2xl mr-3" />
+          )}
+          <span>Log in</span>
         </Button>
 
         <div className="relative w-full my-6">

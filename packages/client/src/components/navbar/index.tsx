@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 import { useSSRStore } from '@/lib/stores';
 
 const Navbar = () => {
-  const isLoggedIn = useSSRStore(useAuthStore, (s) => Boolean(s.jwt));
+  const isLoggedIn = useSSRStore(useAuthStore, (s) => Boolean(s.token));
 
   return (
     <header className="w-full bg-slate-600/5 dark:bg-emerald-900/10 border-b fixed top-0 left-0 select-none">

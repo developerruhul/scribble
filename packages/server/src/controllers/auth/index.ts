@@ -1,11 +1,6 @@
 import { NextFunction, type Request, type Response } from 'express';
 import { v4 as uuid } from 'uuid';
-import {
-  forgotPassSchema,
-  loginFormSchema,
-  registerFormSchema,
-  resetPassSchema,
-} from 'shared';
+import { loginFormSchema, registerFormSchema, resetPassSchema } from 'shared';
 import bcrypt from 'bcrypt';
 import omit from 'lodash/omit';
 import { prismaClient } from '@/lib/db';
@@ -23,6 +18,7 @@ export default class AuthController {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: true,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
   };
 
   /**
@@ -149,5 +145,21 @@ export default class AuthController {
     } catch (error) {
       return next(error);
     }
+  };
+
+  public logout = async (req: Request, res: Response, next: NextFunction) => {
+    res.clearCookie('refresh_token').send('success');
+  };
+
+  public refreshToken = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const refresh_token = req.cookies['refresh_token'];
+    console.log(
+      '🚀 ~ file: index.ts:160 ~ AuthController ~ refresh_token:',
+      refresh_token
+    );
   };
 }
