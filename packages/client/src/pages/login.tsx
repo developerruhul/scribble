@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -14,6 +15,14 @@ import { toast } from '@/components/ui/use-toast';
 import { getErrorMessage } from '@/lib/utils';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/lib/stores/auth-store';
+
+export const getServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  const tokenExists = req.cookies['token'];
+  if (tokenExists) return { redirect: { destination: '/', permanent: true } };
+  return { props: {} };
+};
 
 function Login() {
   const router = useRouter();

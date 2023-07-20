@@ -13,6 +13,17 @@ import { type IRegisterFormSchema, registerFormSchema } from 'shared';
 import illustration from '@/assets/sitting-reading.svg';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+
+
+export const getServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  const tokenExists = req.cookies['token'];
+  if (tokenExists) return { redirect: { destination: '/', permanent: true } };
+  return { props: {} }
+};
+
 
 function Register() {
   const router = useRouter();

@@ -1,6 +1,16 @@
 import ForgotPasswordForm from '@/components/auth/forgot-password-form';
 import { Icons } from '@/components/icons';
 import MainLayout from '@/components/layouts/main-layout';
+import { GetServerSidePropsContext } from 'next';
+
+export const getServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  const tokenExists = req.cookies['token'];
+  if (tokenExists) return { redirect: { destination: '/', permanent: true } };
+  return { props: {} }
+};
+
 
 const ForgotPassword = () => {
   return (
