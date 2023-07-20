@@ -4,8 +4,16 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { IResetPassSchema, resetPassSchema } from 'shared';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/router';
+import { toast } from '../ui/use-toast';
+import { getErrorMessage } from '@/lib/utils';
+import { useMutation } from '@tanstack/react-query';
+import fetcher from '@/lib/axios';
+import { Icons } from '../icons';
 
 const ResetPasswordForm = () => {
+  const router = useRouter();
+
   const form = useForm<IResetPassSchema>({
     resolver: zodResolver(resetPassSchema),
     defaultValues: {
@@ -14,8 +22,33 @@ const ResetPasswordForm = () => {
     },
   });
 
+  const { mutate, isLoading } = useMutation({
+    mutationFn: async (variables: IResetPassSchema & { token: string }) => {
+      return fetcher.patch('/auth/reset-password', variables);
+    },
+    onError(error) {
+      console.log(
+        '🚀 ~ file: reset-password-form.tsx:27 ~ onError ~ error:',
+        error
+      );
+      toast({
+        title: getErrorMessage(error?.response?.data || error),
+        description: 'Please try again.',
+        variant: 'destructive',
+      });
+    },
+    onSuccess() {
+      form.reset();
+      router.push('/login');
+      toast({
+        title: 'Password changed!',
+        description: 'Please login with your new password.',
+      });
+    },
+  });
+
   function onSubmit(values: IResetPassSchema) {
-    console.log(values);
+    mutate({ ...values, token: `${router.query?.token}` });
   }
 
   return (
@@ -53,8 +86,11 @@ const ResetPasswordForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-6 w-full">
-          Log in
+        <Button type="submit" className="mt-6 w-full" disabled={isLoading}>
+          {isLoading && (
+            <Icons.spinner className="animate-spin text-2xl mr-3" />
+          )}
+          <span>Submit</span>
         </Button>
       </form>
     </Form>

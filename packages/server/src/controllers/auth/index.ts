@@ -1,6 +1,11 @@
 import { NextFunction, type Request, type Response } from 'express';
 import { v4 as uuid } from 'uuid';
-import { loginFormSchema, registerFormSchema, resetPassSchema } from 'shared';
+import {
+  forgotPassSchema,
+  loginFormSchema,
+  registerFormSchema,
+  resetPassSchema,
+} from 'shared';
 import bcrypt from 'bcrypt';
 import omit from 'lodash/omit';
 import { prismaClient } from '@/lib/db';
@@ -91,6 +96,8 @@ export default class AuthController {
   ) => {
     try {
       const email = req.body.email;
+      // forgotPassSchema.parse(req.body);
+
       const user = await prismaClient.user.findUnique({
         where: { email },
       });

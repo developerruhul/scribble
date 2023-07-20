@@ -39,7 +39,7 @@ export const PasswordResetMail = ({
                 src={`${baseUrl}/scribble-logo.png`}
                 width="40"
                 height="37"
-                alt="Vercel"
+                alt="Scribble Logo"
                 className="my-0 mx-auto"
               />
             </Section>
