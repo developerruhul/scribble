@@ -1,7 +1,6 @@
-import PasswordResetMail from '@/emails/password-reset-mail';
+import PasswordResetMail from '../emails/password-reset-mail';
 import { User } from '@prisma/client';
 import { render } from '@react-email/render';
-import { type UUID } from 'crypto';
 import nodemailer from 'nodemailer';
 
 // Create a transporter with your Gmail account credentials

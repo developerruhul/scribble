@@ -10,7 +10,7 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "rootDir": "./src",
-    "outDir": "dist",
+    "rootDir": ".",
+    "outDir": "dist"
   }
 }

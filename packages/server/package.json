@@ -2,10 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "packages/server/src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch ./src/index.ts"
+    "dev": "tsx watch ./src/index.ts",
+    "deploy": "prisma migrate deploy",
+    "build": "pnpm run deploy && tsc",
+    "serve": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,7 @@
     "@types/nodemailer": "^6.4.8",
     "@types/react": "18.2.15",
     "@types/uuid": "^9.0.2",
+    "esbuild": "^0.18.14",
     "shared": "*",
     "tsx": "^3.12.7",
     "typescript": "5.1.6"

@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "email": "ruhulamin.webdev@gmail.com",
-  "password": "allahuAkbar"
+  "password": "12345678"
 }
 
 ###

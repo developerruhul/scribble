@@ -1,5 +1,4 @@
 import { type User } from '@prisma/client';
-import omit from 'lodash/omit';
 import { type NextFunction, type Request, type Response } from 'express';
 import { expressjwt } from 'express-jwt';
 import jwt from 'jsonwebtoken';

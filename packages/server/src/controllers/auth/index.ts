@@ -3,15 +3,15 @@ import { v4 as uuid } from 'uuid';
 import { loginFormSchema, registerFormSchema, resetPassSchema } from 'shared';
 import bcrypt from 'bcrypt';
 import omit from 'lodash/omit';
-import { prismaClient } from '@/lib/db';
 import {
   EMAIL_DOES_NOT_EXISTS_ERROR,
   EMAIL_ALREADY_EXISTS_ERROR,
   PASSWORD_DONT_MATCH,
   INVALID_TOKEN,
-} from '@/lib/error-objects';
-import { signJWT } from '@/lib/utils';
-import { sendResetPasswordEmail } from '@/lib/mailer';
+} from '../../lib/error-objects';
+import { signJWT } from '../../lib/utils';
+import { sendResetPasswordEmail } from '../../lib/mailer';
+import { prismaClient } from '../../lib/db';
 
 export default class AuthController {
   private REFRESH_TOKEN_CONFIG = {
