@@ -5,12 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-interface IApiError {
+export interface IApiError {
   statusCode: number;
   message: string;
 }
 
-interface IApiZodError {
+export interface IApiZodError {
   message: string;
   path?: string[];
 }

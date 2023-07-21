@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { useMutation } from '@tanstack/react-query';
 import fetcher from '@/lib/axios';
-import { getErrorMessage } from '@/lib/utils';
+import { IApiError, IApiZodError, getErrorMessage } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import MainLayout from '@/components/layouts/main-layout';
 import RegisterForm from '@/components/auth/register-form';
@@ -15,15 +15,13 @@ import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
 
-
 export const getServerSideProps = async ({
   req,
 }: GetServerSidePropsContext) => {
   const tokenExists = req.cookies['token'];
   if (tokenExists) return { redirect: { destination: '/', permanent: true } };
-  return { props: {} }
+  return { props: {} };
 };
-
 
 function Register() {
   const router = useRouter();
@@ -41,7 +39,7 @@ function Register() {
     mutationFn: async (variables: IRegisterFormSchema) => {
       return fetcher.post('/auth/register', variables);
     },
-    onError(error) {
+    onError(error: { response: { data: IApiError | IApiZodError[] } }) {
       toast({
         title: getErrorMessage(error?.response?.data || error),
         description: 'Please try again!',

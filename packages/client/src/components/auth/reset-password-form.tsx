@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/router';
 import { toast } from '../ui/use-toast';
-import { getErrorMessage } from '@/lib/utils';
+import { IApiError, IApiZodError, getErrorMessage } from '@/lib/utils';
 import { useMutation } from '@tanstack/react-query';
 import fetcher from '@/lib/axios';
 import { Icons } from '../icons';
@@ -26,11 +26,7 @@ const ResetPasswordForm = () => {
     mutationFn: async (variables: IResetPassSchema & { token: string }) => {
       return fetcher.patch('/auth/reset-password', variables);
     },
-    onError(error) {
-      console.log(
-        '🚀 ~ file: reset-password-form.tsx:27 ~ onError ~ error:',
-        error
-      );
+    onError(error: { response: { data: IApiError | IApiZodError[] } }) {
       toast({
         title: getErrorMessage(error?.response?.data || error),
         description: 'Please try again.',

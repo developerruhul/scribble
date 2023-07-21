@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import fetcher from '@/lib/axios';
 import { useToast } from '../ui/use-toast';
 import { Icons } from '../icons';
-import { getErrorMessage } from '@/lib/utils';
+import { IApiError, IApiZodError, getErrorMessage } from '@/lib/utils';
 
 const ForgotPasswordForm = () => {
   const { toast } = useToast();
@@ -22,7 +22,7 @@ const ForgotPasswordForm = () => {
     mutationFn: async (variables: IForgotPassSchema) => {
       return fetcher.post('/auth/forgot-password', variables);
     },
-    onError(error) {
+    onError(error: { response: { data: IApiError | IApiZodError[] } }) {
       toast({
         title: getErrorMessage(error?.response?.data || error),
         description: 'Please try again',

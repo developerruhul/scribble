@@ -12,7 +12,7 @@ import illustration from '@/assets/sitting-reading.svg';
 import { useMutation } from '@tanstack/react-query';
 import fetcher from '@/lib/axios';
 import { toast } from '@/components/ui/use-toast';
-import { getErrorMessage } from '@/lib/utils';
+import { IApiError, IApiZodError, getErrorMessage } from '@/lib/utils';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/lib/stores/auth-store';
 
@@ -40,7 +40,7 @@ function Login() {
     mutationFn: async (variables: IloginFormSchema) => {
       return fetcher.post('/auth/login', variables);
     },
-    onError(error) {
+    onError(error: { response: { data: IApiError | IApiZodError[] } }) {
       toast({
         title: getErrorMessage(error?.response?.data || error),
         description: 'Please try again!',
