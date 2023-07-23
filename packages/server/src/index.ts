@@ -22,6 +22,9 @@ app.use(syntaxErrHandler);
 /**
  * ROUTES
  */
+app.get('/', (req, res) => {
+  res.send("Hello world!")
+})
 app.use('/auth', authRoute);
 
 // handle error created inside app logics
