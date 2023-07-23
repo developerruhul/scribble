@@ -1,4 +1,4 @@
-POST   http://localhost:3001/auth/register
+POST   https://scribble-backend235225.onrender.com/auth/register
 Content-Type: application/json
 
 {
