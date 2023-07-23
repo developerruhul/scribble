@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch ./src/index.ts",
-    "deploy": "prisma migrate deploy",
+    "deploy": "prisma migrate deploy && prisma generate",
     "build": "pnpm run deploy && tsc",
     "serve": "node ./dist/index.js"
   },
