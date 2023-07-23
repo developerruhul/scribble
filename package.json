@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "deploy:server": "nx build server",
+    "deploy:server": "pnpm install && nx build server",
     "serve:server": "nx serve server"
   },
   "private": true,
+  "engines": {
+    "node": "18.16.1"
+  },
   "dependencies": {},
   "devDependencies": {
     "nx": "16.5.2"
