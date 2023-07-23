@@ -1,4 +1,4 @@
-POST   https://scribble-backend235225.onrender.com/auth/register
+POST   http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
@@ -24,3 +24,10 @@ Content-Type: application/json
 {
   "email": "ruhulamin.webdev@gmail.com"
 }
+
+###
+
+GET http://localhost:3001
+
+###
+GET http://stackoverflow.com

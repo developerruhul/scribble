@@ -6,13 +6,22 @@ import authRoute from './routes/auth';
 import syntaxErrHandler, {
   customErrHandler,
 } from './controllers/error-handler';
+import blockCors from './middlewares/block-cors';
 
 /**
  * EXPRESS CONFIGS
  */
 const app = Express();
 
-app.use(cors({ origin: process.env.FRONTEND_URL, optionsSuccessStatus: 200 }));
+const corsOpts = {
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200,
+};
+
+app.options('*', cors(corsOpts));
+app.use(cors(corsOpts));
+app.use(blockCors);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -23,8 +32,8 @@ app.use(syntaxErrHandler);
  * ROUTES
  */
 app.get('/', (req, res) => {
-  res.send("Hello world!")
-})
+  res.send('Hello world!');
+});
 app.use('/auth', authRoute);
 
 // handle error created inside app logics
