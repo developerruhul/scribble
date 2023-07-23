@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "deploy:server": "nx build server && nx serve server"
+    "deploy:server": "nx build server",
+    "serve:server": "nx serve server"
   },
   "private": true,
   "dependencies": {},
