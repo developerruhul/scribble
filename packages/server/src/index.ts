@@ -30,8 +30,8 @@ app.use(customErrHandler);
 /**
  * SERVER CONFIGS
  */
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3001;
+const host = process.env.BACKEND_HOST ?? 'localhost';
+const port = process.env.BACKEND_PORT ? Number(process.env.PORT) : 3001;
 
 app.listen(port, () => {
   console.log(`Listening to http://${host}:${port}`);
